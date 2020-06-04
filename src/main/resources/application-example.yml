@@ -1,0 +1,3 @@
+k-bot:
+  token: "your bot token"
+  cmd: "!koy"
