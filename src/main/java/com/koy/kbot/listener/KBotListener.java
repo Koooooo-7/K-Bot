@@ -1,10 +1,8 @@
 package com.koy.kbot.listener;
 
+import com.koy.kbot.command.IParserService;
 import com.koy.kbot.configuration.properties.KBotProperties;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.User;
+import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +20,19 @@ public class KBotListener extends ListenerAdapter {
 
 
     @Autowired
-    private KBotProperties kBotProperties;
+    private GuildMessageReceivedEventHolder guildMessageReceivedEventHolder;
+    @Autowired
+    private IParserService parser;
 
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
-        Message message = event.getMessage();
-        User author = message.getAuthor();
-        String content = message.getContentRaw();
-        Guild guild = event.getGuild();
-        MessageChannel channel = event.getChannel();
-        // Ignore message if bot
-        if (author.isBot())
+        guildMessageReceivedEventHolder.setGuildMessageReceivedEventHolder(event);
+
+        // Ignore message if bot or there is muted
+        if (event.getMessage().getAuthor().isBot() || !event.getChannel().canTalk()) {
             return;
-
-        if (content.startsWith(kBotProperties.getCmd())) {
-
-            System.out.println(content);
-//            CommandHandler.commandParser(channel, content.substring(6));
-            channel.sendMessage(content + "  yo?").queue();
         }
 
-
+        parser.parser();
     }
 }
