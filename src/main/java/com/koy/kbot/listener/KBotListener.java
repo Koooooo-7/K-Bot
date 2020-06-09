@@ -1,7 +1,6 @@
 package com.koy.kbot.listener;
 
 import com.koy.kbot.command.IParserService;
-import com.koy.kbot.configuration.properties.KBotProperties;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

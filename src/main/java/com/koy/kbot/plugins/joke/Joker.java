@@ -1,5 +1,6 @@
 package com.koy.kbot.plugins.joke;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.koy.kbot.common.MessageSender;
 import com.koy.kbot.common.constant.ApiURLConstant;
@@ -8,6 +9,10 @@ import com.koy.kbot.exception.KBotException;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,23 +35,32 @@ public class Joker implements IPlugin {
     @Autowired
     GuildMessageReceivedEventHolder guildMessageReceivedEventHolder;
 
-    private String jokeGenerator() throws IOException {
-        JSONObject requestJsonObject = HttpUtils.requestGetJsonObject(JOKE_API);
-        return requestJsonObject.get(CONTENT_KEY).toString();
+    private void jokeGenerator() throws IOException {
 
+        final MessageChannel channel = guildMessageReceivedEventHolder.getChannel();
+        HttpUtils.requestGetJsonObject(JOKE_API, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                throw new KBotException(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                if (response.body() == null) {
+                    throw new KBotException("request content is null");
+                }
+                JSONObject requestJsonObject = JSON.parseObject(response.body().string());
+                String joke = requestJsonObject.get(CONTENT_KEY).toString();
+                messageSender.setString(channel, joke + ":rofl:");
+            }
+        });
     }
 
 
     @Override
     public void handle(String[] args) {
         try {
-            String joke = jokeGenerator();
-//            MessageEmbed embed = new EmbedBuilder()
-//                    .setColor(Color.ORANGE)
-//                    .addField("", joke + ":rofl:", false)
-//                    .build();
-            MessageChannel channel = guildMessageReceivedEventHolder.getChannel();
-            messageSender.setString(channel, joke + ":rofl:");
+            jokeGenerator();
         } catch (IOException e) {
             e.printStackTrace();
         }
