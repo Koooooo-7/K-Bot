@@ -1,9 +1,6 @@
 package com.koy.kbot.holder;
 
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 /**
@@ -30,6 +27,10 @@ public class GuildMessageReceivedEventHolder {
     }
 
     public MessageChannel getChannel(){
+        return getGuildMessageReceivedEventHolder().getChannel();
+    }
+
+    public TextChannel getTextChannel(){
         return getGuildMessageReceivedEventHolder().getChannel();
     }
 
