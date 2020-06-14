@@ -36,14 +36,13 @@ public class MessageSender {
             });
 
 
-
     public void setString(MessageChannel channel, String content) {
         threadPoolExecutor.execute(new sendStringMsgWorker(content, channel));
     }
 
     ;
 
-    public void setEmbed(MessageChannel channel,MessageEmbed content) {
+    public void setEmbed(MessageChannel channel, MessageEmbed content) {
         threadPoolExecutor.execute(new sendEmbedMsgWorker(content, channel));
     }
 

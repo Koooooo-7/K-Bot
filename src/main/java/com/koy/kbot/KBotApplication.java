@@ -27,14 +27,14 @@ public class KBotApplication {
     }
 
 
-    // initial boot
+    // initial bot
     @PostConstruct
     public void bootstrap() throws LoginException {
         JDA jda = JDABuilder.createDefault(kBotProperties.getToken())
                 .addEventListeners(kBotListener)
                 .build();
 
-        jda.getPresence().setActivity(Activity.playing("Koy Game"));
+        jda.getPresence().setActivity(Activity.watching("Koy Coding Show"));
         jda.getPresence().setStatus(OnlineStatus.ONLINE);
 
     }

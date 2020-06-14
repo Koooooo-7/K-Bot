@@ -43,12 +43,15 @@ public class PluginsExceptionHandler {
             MessageEmbed embed = new EmbedBuilder()
                     .setColor(Color.ORANGE)
                     .setTitle("ERROR")
+                    .setDescription(ex.getMessage())
                     .addField("", "Ooops! something wrong in the plugin :ghost:", false)
-                    .addField("tips:"," use [help] arg to get more usage commands",true)
+                    .addField("tips:"," use [help] to get more usage commands",true)
                     .build();
 
             MessageChannel channel = guildMessageReceivedEventHolder.getChannel();
             messageSender.setEmbed(channel, embed);
+            // release event
+            guildMessageReceivedEventHolder.removeGuildMessageReceivedEvent();
         }
         return null;
     }

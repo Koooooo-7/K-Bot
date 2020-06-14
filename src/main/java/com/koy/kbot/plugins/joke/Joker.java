@@ -8,7 +8,9 @@ import com.koy.kbot.common.util.HttpUtils;
 import com.koy.kbot.exception.KBotException;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -16,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -51,7 +54,14 @@ public class Joker implements IPlugin {
                 }
                 JSONObject requestJsonObject = JSON.parseObject(response.body().string());
                 String joke = requestJsonObject.get(CONTENT_KEY).toString();
-                messageSender.setString(channel, joke + ":rofl:");
+
+//                RestAction<Void> voidRestAction = channel.sendTyping();
+                MessageEmbed messageEmbed = new EmbedBuilder()
+                        .setColor(Color.PINK)
+                        .setTitle(":rofl: Joke")
+                        .addField("", joke, true)
+                        .build();
+                messageSender.setEmbed(channel, messageEmbed);
             }
         });
     }
@@ -63,6 +73,7 @@ public class Joker implements IPlugin {
             jokeGenerator();
         } catch (IOException e) {
             e.printStackTrace();
+            throw new KBotException("Joker quit his job...");
         }
 
 
