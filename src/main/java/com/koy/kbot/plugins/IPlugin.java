@@ -1,6 +1,5 @@
 package com.koy.kbot.plugins;
 
-import java.io.IOException;
 
 /**
  * @Description
@@ -9,5 +8,5 @@ import java.io.IOException;
  */
 public interface IPlugin {
 
-    void handle(String[] args) throws IOException;
+    void handle(String[] args);
 }

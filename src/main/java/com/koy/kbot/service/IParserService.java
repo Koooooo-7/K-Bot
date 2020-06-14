@@ -1,4 +1,4 @@
-package com.koy.kbot.command;
+package com.koy.kbot.service;
 
 /**
  * @Description
@@ -6,5 +6,5 @@ package com.koy.kbot.command;
  * @Date 2020/06/06
  */
 public interface IParserService {
-    void parser();
+    void parser(String args[]);
 }
