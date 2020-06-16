@@ -19,12 +19,15 @@ public class PluginsCondition implements Condition {
 
         Map<String, Object> attributes = annotatedTypeMetadata.getAnnotationAttributes(PluginsCondition.class.getName());
 
+        // get the value of name property
         String propertyName = conditionContext.getEnvironment().getProperty("name");
+        // get the value of havingValue property
         String value = (String) attributes.get("havingValue");
 
         HashSet<String> plugins = new HashSet<>();
         int i = 0;
         for (; ; ) {
+            // get all values from the <propertyName> list in yaml config file
             String plugin = conditionContext.getEnvironment().getProperty(propertyName + "[" + i++ + "]", String.class);
             if (plugin == null) {
                 break;
