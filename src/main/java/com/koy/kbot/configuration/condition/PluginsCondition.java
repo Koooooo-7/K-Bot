@@ -20,18 +20,17 @@ public class PluginsCondition implements Condition {
         Map<String, Object> attributes = annotatedTypeMetadata.getAnnotationAttributes(PluginsCondition.class.getName());
 
         String propertyName = conditionContext.getEnvironment().getProperty("name");
-        String propertyValue = conditionContext.getEnvironment().getProperty(propertyName);
-        String values = (String) attributes.get("havingValue");
+        String value = (String) attributes.get("havingValue");
 
         HashSet<String> plugins = new HashSet<>();
         int i = 0;
         for (; ; ) {
-            String plugin = conditionContext.getEnvironment().getProperty(propertyValue + "[" + i++ + "]", String.class);
+            String plugin = conditionContext.getEnvironment().getProperty(propertyName + "[" + i++ + "]", String.class);
             if (plugin == null) {
                 break;
             }
-            plugins.add(plugin);
+            plugins.add(plugin.toUpperCase());
         }
-        return plugins.contains(values);
+        return plugins.contains(value.toUpperCase());
     }
 }
