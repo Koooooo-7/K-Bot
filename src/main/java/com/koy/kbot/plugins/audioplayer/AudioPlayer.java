@@ -1,5 +1,7 @@
 package com.koy.kbot.plugins.audioplayer;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
 import com.koy.kbot.plugins.audioplayer.search.MusicSearcherHandler;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Description
@@ -24,6 +27,12 @@ import java.util.Map;
  */
 @Component
 public class AudioPlayer implements IPlugin {
+
+    private static final Cache<String, String> trackUrlCache = CacheBuilder.newBuilder()
+            .initialCapacity(10)
+            .expireAfterWrite(30, TimeUnit.MINUTES)
+            .maximumSize(500)
+            .build();
 
     @Autowired
     GuildMessageReceivedEventHolder guildMessageReceivedEventHolder;
@@ -54,8 +63,13 @@ public class AudioPlayer implements IPlugin {
     private void loadAndPlay(final TextChannel channel, final String songName) {
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
 
-        // search song trackUrl by song name
-        String trackUrl = musicSearcherHandler.search(songName);
+        String trackUrl = trackUrlCache.getIfPresent(songName.toUpperCase());
+        if (trackUrl == null) {
+            // search song trackUrl by song name
+            trackUrl = musicSearcherHandler.search(songName);
+            trackUrlCache.put(songName.toUpperCase(), trackUrl);
+        }
+
         playerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
