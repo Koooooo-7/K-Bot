@@ -9,15 +9,15 @@ import java.util.HashSet;
 import java.util.Map;
 
 /**
- * @Description the solver of ConditionalOnPluginsSummoned
+ * @Description the solver of ConditionalOnSummoned
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/06/16
  */
-public class PluginsCondition implements Condition {
+public class SummonedCondition implements Condition {
     @Override
     public boolean matches(@NotNull ConditionContext conditionContext, @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
 
-        Map<String, Object> attributes = annotatedTypeMetadata.getAnnotationAttributes(PluginsCondition.class.getName());
+        Map<String, Object> attributes = annotatedTypeMetadata.getAnnotationAttributes(SummonedCondition.class.getName());
 
         boolean matchIfMissing = (boolean) attributes.get("matchIfMissing");
         if (matchIfMissing) {

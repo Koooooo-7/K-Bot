@@ -14,8 +14,8 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Conditional(PluginsCondition.class)
-public @interface ConditionalOnPluginsSummoned {
+@Conditional(SummonedCondition.class)
+public @interface ConditionalOnSummoned {
 
     String name() default "";
 
