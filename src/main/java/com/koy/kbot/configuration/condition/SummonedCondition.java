@@ -17,7 +17,7 @@ public class SummonedCondition implements Condition {
     @Override
     public boolean matches(@NotNull ConditionContext conditionContext, @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
 
-        Map<String, Object> attributes = annotatedTypeMetadata.getAnnotationAttributes(SummonedCondition.class.getName());
+        Map<String, Object> attributes = annotatedTypeMetadata.getAnnotationAttributes(ConditionalOnSummoned.class.getName());
 
         boolean matchIfMissing = (boolean) attributes.get("matchIfMissing");
         if (matchIfMissing) {
@@ -25,7 +25,7 @@ public class SummonedCondition implements Condition {
         }
 
         // get the value of name property
-        String propertyName = conditionContext.getEnvironment().getProperty("name");
+        String propertyName = (String) attributes.get("name");
         // get the value of havingValue property
         String value = (String) attributes.get("havingValue");
 
