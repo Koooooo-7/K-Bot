@@ -7,5 +7,5 @@
    \ \__\\ \__\             \ \_______\ \_______\   \ \__\
     \|__| \|__|              \|_______|\|_______|    \|__|
 
-                                              -- A Discord bot by Koy(https://github.com/Koooooo-7).
+                                              -- A Discord Bot by Koy(https://github.com/Koooooo-7).
 
