@@ -16,7 +16,6 @@ import okhttp3.Callback;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.io.IOException;
@@ -26,7 +25,6 @@ import java.io.IOException;
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/06/06
  */
-@Component
 public class Joker implements IPlugin {
 
     private static final String JOKE_API = ApiURLConstant.JOKE_API;

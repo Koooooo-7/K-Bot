@@ -21,10 +21,9 @@ import java.awt.*;
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/06/14
  */
-@Component
 public class Time implements IPlugin {
 
-    public static final String DEFAULT_CITY = "beijing";
+    private static final String DEFAULT_CITY = "beijing";
 
     @Autowired
     MessageSender messageSender;
