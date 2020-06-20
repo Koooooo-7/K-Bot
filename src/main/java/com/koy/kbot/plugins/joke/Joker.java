@@ -76,4 +76,9 @@ public class Joker implements IPlugin {
 
 
     }
+
+    @Override
+    public String command() {
+        return "joke";
+    }
 }

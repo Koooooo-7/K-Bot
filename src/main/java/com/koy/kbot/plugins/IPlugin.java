@@ -9,4 +9,6 @@ package com.koy.kbot.plugins;
 public interface IPlugin {
 
     void handle(String[] args);
+
+    String command();
 }

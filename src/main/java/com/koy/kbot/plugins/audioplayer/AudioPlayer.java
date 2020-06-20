@@ -14,7 +14,6 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +24,6 @@ import java.util.concurrent.TimeUnit;
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/06/09
  */
-@Component
 public class AudioPlayer implements IPlugin {
 
     private static final Cache<String, String> trackUrlCache = CacheBuilder.newBuilder()
@@ -135,5 +133,10 @@ public class AudioPlayer implements IPlugin {
             skipTrack(guildMessageReceivedEventHolder.getTextChannel());
         }
 
+    }
+
+    @Override
+    public String command() {
+        return "play";
     }
 }

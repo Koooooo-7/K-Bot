@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.awt.*;
 
@@ -43,6 +42,11 @@ public class Time implements IPlugin {
         String city = args[2];
         sendTimeByCity(city);
 
+    }
+
+    @Override
+    public String command() {
+        return "time";
     }
 
     private void sendTimeByCity(String city) {

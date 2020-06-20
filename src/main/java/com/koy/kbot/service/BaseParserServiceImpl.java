@@ -1,12 +1,11 @@
 package com.koy.kbot.service;
 
-import com.koy.kbot.configuration.properties.KBotProperties;
 import com.koy.kbot.plugins.IPlugin;
-import com.koy.kbot.plugins.audioplayer.AudioPlayer;
-import com.koy.kbot.plugins.joke.Joker;
-import com.koy.kbot.plugins.time.Time;
+import com.koy.kbot.plugins.help.HelpPlugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @Description
@@ -18,39 +17,27 @@ public class BaseParserServiceImpl implements IParserService {
 
 
     @Autowired
-    KBotProperties kBotProperties;
+    List<IPlugin> plugins;
 
     @Autowired
-    Joker joker;
-
-    @Autowired
-    AudioPlayer audioPlayer;
-
-    @Autowired
-    Time time;
-
+    HelpPlugin helpPlugin;
 
 
     @Override
     public void parser(String[] args) {
 
 
-
-        // TODO: chat bot api
+        // get command
         String command = args[1].toUpperCase();
 
+        // send to matched plugins, if not, send to help plugin
+        plugins
+                .stream()
+                .filter(p -> p.command().toUpperCase().equals(command))
+                .findFirst()
+                .orElseGet(() -> helpPlugin)
+                .handle(args);
 
-        if ("JOKE".equals(command)) {
-            joker.handle(args);
-        }
-
-        if ("PLAY".equals(command)) {
-            audioPlayer.handle(args);
-        }
-
-        if ("TIME".equals(command)){
-            time.handle(args);
-        }
     }
 
 }
