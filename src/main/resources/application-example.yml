@@ -1,3 +1,13 @@
 k-bot:
   token: "your bot token"
   cmd: "!koy"
+
+  # register plugins
+  plugins:
+  - time
+  - joker
+  - player
+
+  # register listeners
+  listeners:
+  - kbot
