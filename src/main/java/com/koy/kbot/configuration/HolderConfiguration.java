@@ -1,5 +1,6 @@
 package com.koy.kbot.configuration;
 
+import com.koy.kbot.holder.GuildMemberEventHolder;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,5 +16,10 @@ public class HolderConfiguration {
     @Bean
     public GuildMessageReceivedEventHolder guildMessageReceivedEventHolder(){
         return new GuildMessageReceivedEventHolder();
+    }
+
+    @Bean
+    public GuildMemberEventHolder guildMemberEventHolder(){
+        return new GuildMemberEventHolder();
     }
 }
