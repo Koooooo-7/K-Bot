@@ -11,3 +11,4 @@ k-bot:
   # register listeners
   listeners:
   - kbot
+  - member
