@@ -10,7 +10,6 @@ import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
@@ -20,8 +19,7 @@ import java.awt.*;
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/06/04
  */
-@Component
-public class KBotListener extends ListenerAdapter {
+public class KBotListener extends ListenerAdapter implements IListener {
 
 
     @Autowired
@@ -50,9 +48,6 @@ public class KBotListener extends ListenerAdapter {
             return;
         }
 
-        // hold event
-        guildMessageReceivedEventHolder.setGuildMessageReceivedEventHolder(event);
-
         // get args
         String[] args = content.split("\\s+");
 
@@ -72,6 +67,8 @@ public class KBotListener extends ListenerAdapter {
             return;
         }
 
+        // hold event
+        guildMessageReceivedEventHolder.setGuildMessageReceivedEventHolder(event);
         // parser command
         parser.parser(args);
     }

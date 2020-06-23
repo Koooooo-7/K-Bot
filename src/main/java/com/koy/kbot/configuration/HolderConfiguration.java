@@ -2,6 +2,8 @@ package com.koy.kbot.configuration;
 
 import com.koy.kbot.holder.GuildMemberEventHolder;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
+import com.koy.kbot.listener.MemberListener;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +21,7 @@ public class HolderConfiguration {
     }
 
     @Bean
+    @ConditionalOnClass(MemberListener.class)
     public GuildMemberEventHolder guildMemberEventHolder(){
         return new GuildMemberEventHolder();
     }
