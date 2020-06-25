@@ -135,13 +135,15 @@ public class AudioPlayer implements IPlugin {
     }
 
     private void connectToVoiceChannel(AudioManager audioManager, VoiceChannel voiceChannel) {
-        audioManager.openAudioConnection(voiceChannel);
+        if(!audioManager.isConnected()&& !audioManager.isAttemptingToConnect()){
+            audioManager.openAudioConnection(voiceChannel);
+        }
     }
 
 
     /**
      *  play for song name: !cmd play song name
-     *  play for track url: !cmd play -u www.example.com
+     *  play for track url: !cmd play -u www.example.com/song.mp3
      */
     @Override
     public void handle(String[] args) {

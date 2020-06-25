@@ -9,8 +9,8 @@ public interface IMusicSearcher {
 
 
     /**
-     * the searcher older
-     * @return older, from smaller to bigger
+     * the searcher order
+     * @return order, from smaller to bigger
      */
      int getOrder();
 
