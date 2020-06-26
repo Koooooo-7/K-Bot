@@ -6,7 +6,6 @@ import com.koy.kbot.exception.KBotException;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 /**
  * @Description
@@ -14,8 +13,6 @@ import java.util.regex.Pattern;
  * @Date 2020/06/06
  */
 public class HttpUtils {
-
-    private static final Pattern pattern = Pattern.compile("/((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)/");
 
     public static void requestGetJsonObject(String url, Callback callback) throws IOException, KBotException {
         OkHttpClient httpClient = new OkHttpClient.Builder().build();
@@ -49,8 +46,4 @@ public class HttpUtils {
          return null;
     }
 
-
-    public static boolean isUrl(String content){
-        return pattern.matcher(content).matches();
-    }
 }
