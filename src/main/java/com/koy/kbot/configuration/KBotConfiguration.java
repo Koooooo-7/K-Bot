@@ -5,6 +5,7 @@ import com.koy.kbot.listener.KBotListener;
 import com.koy.kbot.plugins.audioplayer.AudioPlayer;
 import com.koy.kbot.plugins.joke.Joker;
 import com.koy.kbot.plugins.time.Time;
+import com.koy.kbot.plugins.weather.Weather;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
@@ -60,6 +61,12 @@ public class KBotConfiguration {
     @ConditionalOnSummoned(name = "k-bot.plugins", havingValue = "player")
     public AudioPlayer audioPlayer(){
         return new AudioPlayer();
+    }
+
+    @Bean
+    @ConditionalOnSummoned(name = "k-bot.plugins", havingValue = "weather")
+    public Weather weather(){
+        return new Weather();
     }
 
 }
