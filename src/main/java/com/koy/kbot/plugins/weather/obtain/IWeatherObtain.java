@@ -7,7 +7,7 @@ import com.koy.kbot.entity.weather.WeatherInfo;
  *
  * @author sivyer wang
  */
-public interface WeatherObtain {
+public interface IWeatherObtain {
 
     /**
      * to obtain weather info

@@ -5,7 +5,6 @@ import com.koy.kbot.common.util.HttpUtils;
 import com.koy.kbot.configuration.properties.WeatherProperties;
 import com.koy.kbot.entity.weather.WeatherInfo;
 import org.apache.commons.codec.binary.StringUtils;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -16,7 +15,7 @@ import java.util.Set;
  *
  * @author sivyer wang
  */
-public abstract class AbstractWeatherObtain implements WeatherObtain{
+public abstract class AbstractWeatherObtain implements IWeatherObtain {
 
     @Autowired
     private WeatherProperties props;

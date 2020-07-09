@@ -1,18 +1,16 @@
 package com.koy.kbot.plugins.weather;
 
 import com.koy.kbot.common.MessageSender;
-import com.koy.kbot.configuration.properties.WeatherProperties;
 import com.koy.kbot.entity.weather.WeatherInfo;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
-import com.koy.kbot.plugins.weather.obtain.WeatherObtain;
+import com.koy.kbot.plugins.weather.obtain.IWeatherObtain;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,7 +28,7 @@ public class Weather implements IPlugin {
     GuildMessageReceivedEventHolder guildMessageReceivedEventHolder;
 
     @Autowired
-    private List<WeatherObtain> obtains;
+    private List<IWeatherObtain> obtains;
 
     @Override
     public void handle(String[] args) {
@@ -47,7 +45,7 @@ public class Weather implements IPlugin {
         String cityCode = cityCodeBuilder.toString();
         WeatherInfo info = null;
         for(int i = 0 , size = obtains.size() ; null == info && i < size ; i++){
-            WeatherObtain weatherObtain = obtains.get(i);
+            IWeatherObtain weatherObtain = obtains.get(i);
             //get the first matched
             info = weatherObtain.obtain(cityCode);
         }

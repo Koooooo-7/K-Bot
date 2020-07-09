@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.koy.kbot.configuration.properties.WeatherProperties;
 import com.koy.kbot.entity.weather.WeatherInfo;
+import com.koy.kbot.plugins.weather.Weather;
 import com.koy.kbot.plugins.weather.obtain.AbstractWeatherObtain;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
  * @author sivyer wang
  */
 @Component
+@ConditionalOnClass(Weather.class)
 public class OpenWeatherObtain extends AbstractWeatherObtain {
     /**
      * alias of openWeatherMap
