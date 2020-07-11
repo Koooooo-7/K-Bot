@@ -52,13 +52,14 @@ public class Weather implements IPlugin {
         StringBuilder weatherDescription = new StringBuilder();
         if(null != info){
             weatherDescription.append(cityCode)
-                    .append(" now is ")
+                    .append(" is ")
                     .append(info.getMain())
-                    .append(" weather,")
+                    .append(" now, ")
                     .append(info.getDescription())
-                    .append(" , ")
+                    .append(", ")
                     .append(" wind speed is ")
-                    .append(info.getWindSpeed());
+                    .append(info.getWindSpeed())
+                    .append("m/s");
             MessageEmbed messageEmbed = new EmbedBuilder()
                     .setColor(Color.PINK)
                     .setTitle("Weather info")
