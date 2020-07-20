@@ -1,7 +1,9 @@
 package com.koy.kbot.service;
 
+import com.koy.kbot.configuration.core.CommandContext;
+import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.plugins.IPlugin;
-import com.koy.kbot.plugins.help.HelpPlugin;
+import com.koy.kbot.plugins.help.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +19,10 @@ public class BaseParserServiceImpl implements IParserService {
 
 
     @Autowired
-    List<IPlugin> plugins;
+    private List<IPlugin> plugins;
 
     @Autowired
-    HelpPlugin helpPlugin;
+    private Helper helper;
 
 
     @Override
@@ -31,12 +33,27 @@ public class BaseParserServiceImpl implements IParserService {
         String command = args[1].toUpperCase();
 
         // send to matched plugins, if not, send to help plugin
+        IPlugin plugin = CommandContext.getCallsIplugin(command);
+        if (plugin != null){
+            plugin.handle(args);
+        }
+
+        plugin = CommandContext.getFastComands(command);
+
+        if (plugin != null){
+            plugin.handle(args);
+            return;
+        }
+
+        // Backward compatibility, remove it soon, just give the command to helper by default.
         plugins
                 .stream()
                 .filter(p -> p.command().toUpperCase().equals(command))
                 .findFirst()
-                .orElseGet(() -> helpPlugin)
+                .orElseGet(() -> helper)
                 .handle(args);
+
+
 
     }
 

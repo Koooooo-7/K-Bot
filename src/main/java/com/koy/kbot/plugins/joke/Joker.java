@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.koy.kbot.common.MessageSender;
 import com.koy.kbot.common.constant.ApiURLConstant;
 import com.koy.kbot.common.util.HttpUtils;
+import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.exception.KBotException;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
@@ -25,6 +26,7 @@ import java.io.IOException;
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/06/06
  */
+@Plugin(name = "joker", call = "joker", fastCommand = {"j", "jk"})
 public class Joker implements IPlugin {
 
     private static final String JOKE_API = ApiURLConstant.JOKE_API;
@@ -53,7 +55,6 @@ public class Joker implements IPlugin {
                 JSONObject requestJsonObject = JSON.parseObject(response.body().string());
                 String joke = requestJsonObject.get(CONTENT_KEY).toString();
 
-//                RestAction<Void> voidRestAction = channel.sendTyping();
                 MessageEmbed messageEmbed = new EmbedBuilder()
                         .setColor(Color.PINK)
                         .setTitle(":rofl: Joke")
