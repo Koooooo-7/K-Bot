@@ -1,6 +1,7 @@
 package com.koy.kbot.plugins.weather;
 
 import com.koy.kbot.common.MessageSender;
+import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.entity.weather.WeatherInfo;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
@@ -19,6 +20,7 @@ import java.util.List;
  *
  * @author sivyer wang
  */
+@Plugin(name = "weather", call = "weather", fastCommand = "w")
 public class Weather implements IPlugin {
 
     @Autowired
@@ -32,25 +34,25 @@ public class Weather implements IPlugin {
 
     @Override
     public void handle(String[] args) {
-        if(null == args || args.length < 3){
+        if (null == args || args.length < 3) {
             return;
         }
         //city code maybe composed of multi string
         StringBuilder cityCodeBuilder = new StringBuilder();
-        for(int i = 0 , length = args.length ; i < length ; i++){
-            if(i >= 2){
+        for (int i = 0, length = args.length; i < length; i++) {
+            if (i >= 2) {
                 cityCodeBuilder.append(args[i]).append(" ");
             }
         }
         String cityCode = cityCodeBuilder.toString();
         WeatherInfo info = null;
-        for(int i = 0 , size = obtains.size() ; null == info && i < size ; i++){
+        for (int i = 0, size = obtains.size(); null == info && i < size; i++) {
             IWeatherObtain weatherObtain = obtains.get(i);
             //get the first matched
             info = weatherObtain.obtain(cityCode);
         }
         StringBuilder weatherDescription = new StringBuilder();
-        if(null != info){
+        if (null != info) {
             weatherDescription.append(cityCode)
                     .append(" is ")
                     .append(info.getMain())
@@ -68,7 +70,7 @@ public class Weather implements IPlugin {
 
             MessageChannel channel = guildMessageReceivedEventHolder.getChannel();
             messageSender.setEmbed(channel, messageEmbed);
-        }else {
+        } else {
             weatherDescription.append("sorry! I can't get weather info");
             MessageEmbed messageEmbed = new EmbedBuilder()
                     .setColor(Color.PINK)

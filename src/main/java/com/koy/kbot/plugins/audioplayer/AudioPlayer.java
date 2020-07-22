@@ -3,6 +3,7 @@ package com.koy.kbot.plugins.audioplayer;
 import com.google.common.base.Joiner;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.exception.KBotException;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
@@ -26,6 +27,7 @@ import java.util.concurrent.TimeUnit;
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/06/09
  */
+@Plugin(name = "audioPlayer", call = "play",fastCommand = "p")
 public class AudioPlayer implements IPlugin {
 
     private static final Cache<String, String> trackUrlCache = CacheBuilder.newBuilder()

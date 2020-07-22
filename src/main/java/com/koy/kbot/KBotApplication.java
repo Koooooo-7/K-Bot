@@ -1,13 +1,12 @@
 package com.koy.kbot;
 
+import com.koy.kbot.configuration.core.CommandContext;
 import com.koy.kbot.configuration.core.JDABuilderWrapper;
 import com.koy.kbot.configuration.properties.KBotProperties;
 import com.koy.kbot.listener.IListener;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.hooks.EventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +24,10 @@ public class KBotApplication {
     @Autowired
     private KBotProperties kBotProperties;
 
+    @Autowired
+    CommandContext commandContext;
+
+
     public static void main(String[] args) {
         SpringApplication.run(KBotApplication.class, args);
     }
@@ -33,6 +36,7 @@ public class KBotApplication {
     // initial bot
     @PostConstruct
     public void bootstrap() throws LoginException {
+        commandContext.initPluginsCommand();
         JDA jda = JDABuilderWrapper.createDefault(kBotProperties.getToken())
                 .addEventListeners(listeners)
                 .build();
