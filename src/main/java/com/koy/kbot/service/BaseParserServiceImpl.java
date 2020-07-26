@@ -1,7 +1,6 @@
 package com.koy.kbot.service;
 
 import com.koy.kbot.configuration.core.CommandContext;
-import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.plugins.IPlugin;
 import com.koy.kbot.plugins.help.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +32,13 @@ public class BaseParserServiceImpl implements IParserService {
         String command = args[1].toUpperCase();
 
         // send to matched plugins, if not, send to help plugin
-        IPlugin plugin = CommandContext.getCallsIplugin(command);
+        IPlugin plugin = CommandContext.getCallOnPlugin(command);
         if (plugin != null){
             plugin.handle(args);
             return;
         }
 
-        plugin = CommandContext.getFastComands(command);
+        plugin = CommandContext.getFastCommands(command);
 
         if (plugin != null){
             plugin.handle(args);

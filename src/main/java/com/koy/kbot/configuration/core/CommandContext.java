@@ -50,11 +50,11 @@ public class CommandContext {
     }
 
 
-    public static IPlugin getCallsIplugin(String callName) {
+    public static IPlugin getCallOnPlugin(String callName) {
         return (IPlugin) calls.get(callName.toUpperCase());
     }
 
-    public static IPlugin getFastComands(String fastCommand) {
+    public static IPlugin getFastCommands(String fastCommand) {
         return (IPlugin) fastCommands.get(fastCommand.toUpperCase());
     }
 
