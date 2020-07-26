@@ -36,6 +36,7 @@ public class BaseParserServiceImpl implements IParserService {
         IPlugin plugin = CommandContext.getCallsIplugin(command);
         if (plugin != null){
             plugin.handle(args);
+            return;
         }
 
         plugin = CommandContext.getFastComands(command);
