@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.function.BiFunction;
 
 /**
  * @Description
@@ -30,11 +30,16 @@ public class CommandContext {
 
     public void initPluginsCommand() {
 
-        BiFunction<Object, Object, Object> duplicate = (v1, v2) -> {
+        PutIfExistFunction<Object, String, Object, Object> duplicate = (k, v1, v2) -> {
             // throw exception directly
-            //TODO: more clearly details about duplicate
-            throw new IllegalArgumentException("can not have duplicate name of call or fast command !");
+            Plugin pluginAnnotation = v1.getClass().getAnnotation(Plugin.class);
+            String beanName = v1.getClass().getName();
+            String pluginName = pluginAnnotation.name();
+            String name = StringUtils.isEmpty(pluginName) ? beanName : pluginName;
+            throw new IllegalArgumentException("can not have duplicate name of call or fast command ! the command "
+                    + k + " already in plugin:" + name);
         };
+
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(Plugin.class);
         Assert.notEmpty(beans, "no plugins can be found !");
 
@@ -61,7 +66,7 @@ public class CommandContext {
     // if necessary to use skip list
     private static class CommandMap<K, V> extends ConcurrentSkipListMap<K, V> {
         // TODO: effective stuff,  thoughts: forkJoinPool, lite lock
-        synchronized void putIfExist(K key, V value, BiFunction<? super V, ? super V, ? extends V> applyIfExist) {
+        synchronized void putIfExist(K key, V value, PutIfExistFunction<? extends V, K, V, V> applyIfExist) {
             boolean containsKey = this.containsKey(key);
             if (!containsKey) {
                 this.put(key, value);
@@ -69,7 +74,8 @@ public class CommandContext {
             }
 
             V preValue = this.get(key);
-            V newV = applyIfExist.apply(preValue, value);
+            V newV = applyIfExist.apply(key, preValue, value);
+
             this.put(key, newV);
         }
     }
