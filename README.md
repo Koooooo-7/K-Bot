@@ -11,7 +11,7 @@
 
 
 
-### [Intruduction](##Intruduction)  ·  [Usage](##Usage)  ·  [Plugins](##Plugins)  ·  [Contributing](##Contributing)  · [Statement](##statement )
+### [Intruduction](#Intruduction)  ·  [Usage](#bookusage)  ·  [Plugins](#wrenchplugins)  ·  [Contributing](##Contributing)  · [Statement](#-statement )
 
 <!---
 labels , star... something
@@ -114,7 +114,7 @@ public AudioPlayer audioPlayer(){
 }
 ```
 
-**Example **
+**Example**
 
 the example of how to create the plugin `joker`.
 
@@ -145,17 +145,19 @@ it is so easy to add an new plugin to `K-bot`, isn't it ! :tada:
 
 >  NOTE:  **Command** doesn't contain the command/name calling the bot. :pencil:
 
-| Plugin      | Description                                                  | Command            | Example         |
-| ----------- | ------------------------------------------------------------ | ------------------ | --------------- |
-| AudioPlayer | A audio player based on [lavaplayer](https://github.com/sedmelluq/lavaplayer). | play [- u ]        | play hello      |
-| Joke        | Send a joke randomly.                                        | joke               | joke            |
-| time        | Report the current time of the city.                         | time [cityname]    | time Tokyo      |
-| weather     | Report the current weather details of the city.              | weather [cityname] | weather Beijing |
-|             |                                                              |                    |                 |
-| ...         | waiting for your ideas !:rocket:                             |                    |                 |
+| Plugin  | Description                                                  | Command            | Example         |
+| ------- | ------------------------------------------------------------ | ------------------ | --------------- |
+| Player  | A audio player based on [lavaplayer](https://github.com/sedmelluq/lavaplayer). | play [- u ]        | play hello      |
+| Joke    | Send a joke randomly.                                        | joke               | joke            |
+| time    | Report the current time of the city.                         | time [cityname]    | time Tokyo      |
+| weather | Report the current weather details of the city.              | weather [cityname] | weather Beijing |
+|         |                                                              |                    |                 |
+| ...     | waiting for your ideas !:rocket:                             |                    |                 |
 
 ---
 
 ## 📃 Statement
 
-[MIT](LICENSE)
+The API of bot are all getting from the open resources, if there has any problem, leaving an issues please.
+
+[MIT](LICENSE) @Koy
