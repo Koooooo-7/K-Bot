@@ -10,5 +10,6 @@ public interface IPlugin {
 
     void handle(String[] args);
 
+    @Deprecated
     String command();
 }
