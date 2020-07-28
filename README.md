@@ -17,15 +17,35 @@
 labels , star... something
 -->
 
+<p align="center">
+    <a href="javascript:">
+        <img alt="kbot" src=" https://img.shields.io/badge/Discord-K--bot-brightgreen?style=plastic&logo=appveyor"  >
+    </a>
+    <a href="https://sonarcloud.io/dashboard?id=Koooooo-7_K-Bot">
+        <img alt="sonar" src="https://sonarcloud.io/images/project_badges/sonarcloud-black.svg" >
+    </a>
+    <a href="javascript:">
+        <img alt="kot CI" src="https://github.com/Koooooo-7/K-Bot/workflows/K%20Bot%20CI/badge.svg"  >
+    </a>
+</p>
+
+
+
 ---
 
 ## 📣Introduction
 
+>  A DIY bot that you can be the designer of your own **`K-bot`** ​!:fire:
+
 **`K-bot`** is a Quantum Discord which means she can do everything, if she has enough plugins. :rocket:
 
-It is NOT the specific bot that you just import it to your Discord server( but she can do that).
+It is **NOT** the specific bot which is just for importing to your Discord server( absolutely, she can do that ! :wink: ).
 
-She is made in `SpringBoot` and makes all the plugins as plugins/configurations.  hence you can chose what skills you want for `k-bot` via setting the configuration files to summon the abilities, and you can register your own plugins easily. Besides that, you can give her your own calling name/command !
+
+
+**`K-bot`** is developed in `SpringBoot` and makes all the plugins as plugins/configurations.  hence you can chose what skills you want for `K-bot` via setting the configuration files to summon the abilities, and you can add and register your own plugins in **`K-bot`** easily. :cowboy_hat_face: 
+
+
 
 ---
 
