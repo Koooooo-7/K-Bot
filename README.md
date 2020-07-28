@@ -19,7 +19,7 @@ labels , star... something
 
 <p align="center">
     <a href="javascript:">
-        <img alt="kbot" src=" https://img.shields.io/badge/Discord-K--bot-brightgreen?style=plastic&logo=appveyor"  >
+        <img alt="kbot" src="https://img.shields.io/badge/Discord-K--bot-brightgreen?style=plastic&logo=appveyor"  >
     </a>
     <a href="https://sonarcloud.io/dashboard?id=Koooooo-7_K-Bot">
         <img alt="sonar" src="https://sonarcloud.io/images/project_badges/sonarcloud-black.svg" >
