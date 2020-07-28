@@ -1,23 +1,22 @@
+# reference： https://dev.to/remast/using-sonarcloud-with-github-actions-and-maven-31kg
+name: SonarCloud
 on:
-  # Trigger analysis when pushing in master or pull requests, and when creating
-  # a pull request. 
   push:
     branches:
-      - master
+    - master
   pull_request:
-      types: [opened, synchronize, reopened]
-name: Sonar
+    types: [opened, synchronize, reopened]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
-    - name: Set up JDK 1.8
+    - name: Set up JDK 8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: SonarCloud Scan
-      run: mvn verify -Dmaven.test.skip=true org.sonarsource.scanner.maven:sonar
+    - name: Analyze with SonarCloud
+      run: mvn -B verify sonar:sonar -Dmaven.test.skip=true -Dsonar.projectKey=Koooooo-7_K-Bot -Dsonar.organization=koooooo-7 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
