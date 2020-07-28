@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 8
+    - name: Set up JDK 11
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
+        java-version: 11
     - name: Analyze with SonarCloud
       run: mvn -B verify sonar:sonar -Dmaven.test.skip=true -Dsonar.projectKey=Koooooo-7_K-Bot -Dsonar.organization=koooooo-7 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
