@@ -1,5 +1,6 @@
 package com.koy.kbot.plugins.help;
 
+import com.google.common.base.Joiner;
 import com.koy.kbot.common.MessageSender;
 import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
-import java.util.HashMap;
+import java.util.Collection;
 
 /**
  * @Description default plugin always available
@@ -28,6 +29,9 @@ public class Helper implements IPlugin {
     @Autowired
     MessageSender messageSender;
 
+    @Autowired
+    CommandMatcher commandMatcher;
+
     // TODO helper contains all the available plugins on bootstrap
 //    private static final HashMap<String, String> commands = new HashMap<>();
 
@@ -36,7 +40,26 @@ public class Helper implements IPlugin {
     public void handle(String[] args) {
         MessageChannel channel = guildMessageReceivedEventHolder.getChannel();
 
-        if (!command().toUpperCase().equals(args[0])) {
+
+        if (!command().toUpperCase().equals(args[1])) {
+
+            // find recommend command
+            Collection<String> commands = commandMatcher.getRecommendCommand(args[1]);
+
+            if (!commands.isEmpty()) {
+
+                String recommend = String.join(" ,", commands);
+                MessageEmbed embed = new EmbedBuilder()
+                        .setColor(Color.ORANGE)
+                        .setTitle("Help")
+                        .addField("", "Sorry, I cant understand ur command :ghost:", false)
+                        .addField("recommend", "The most similar commands:", true)
+                        .addField("", recommend, false)
+                        .build();
+
+                messageSender.setEmbed(channel, embed);
+                return;
+            }
 
             MessageEmbed embed = new EmbedBuilder()
                     .setColor(Color.ORANGE)

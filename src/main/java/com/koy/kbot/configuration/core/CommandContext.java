@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
 
@@ -27,6 +29,8 @@ public class CommandContext {
     private static final CommandMap<String, Object> calls = new CommandMap<>();
     // collect the fast commands
     private static final CommandMap<String, Object> fastCommands = new CommandMap<>();
+    // collect all the commands
+    private static final List<String> commands = new ArrayList<>();
 
     public void initPluginsCommand() {
 
@@ -47,8 +51,14 @@ public class CommandContext {
             Object beanInstance = e.getValue();
             Plugin pluginAnnotation = beanInstance.getClass().getAnnotation(Plugin.class);
             String call = pluginAnnotation.call();
+            commands.add(call);
             String[] fastCommand = pluginAnnotation.fastCommand();
-            Arrays.stream(fastCommand).parallel().forEach(el -> fastCommands.putIfExist(el.toUpperCase(), beanInstance, duplicate));
+            Arrays.stream(fastCommand).parallel()
+                    .forEach(cmd -> {
+                                fastCommands.putIfExist(cmd.toUpperCase(), beanInstance, duplicate);
+                                commands.add(cmd);
+                            }
+                    );
             calls.put(call.toUpperCase(), beanInstance);
         });
 
@@ -61,6 +71,10 @@ public class CommandContext {
 
     public static IPlugin getFastCommands(String fastCommand) {
         return (IPlugin) fastCommands.get(fastCommand.toUpperCase());
+    }
+
+    public static List<String> getCommands() {
+        return commands;
     }
 
     // if necessary to use skip list
