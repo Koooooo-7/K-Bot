@@ -1,6 +1,5 @@
 package com.koy.kbot.plugins.help;
 
-import com.google.common.base.Joiner;
 import com.koy.kbot.common.MessageSender;
 import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
@@ -41,7 +40,7 @@ public class Helper implements IPlugin {
         MessageChannel channel = guildMessageReceivedEventHolder.getChannel();
 
 
-        if (!command().toUpperCase().equals(args[1])) {
+        if (!command().equalsIgnoreCase(args[1])) {
 
             // find recommend command
             Collection<String> commands = commandMatcher.getRecommendCommand(args[1]);
