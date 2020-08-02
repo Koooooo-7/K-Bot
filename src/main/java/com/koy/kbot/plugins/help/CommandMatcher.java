@@ -27,14 +27,13 @@ public class CommandMatcher {
     // the default threshold of score, when the min distance < 3, there will have recommend command
     private static final int DEFAULT_THRESHOLD = 2;
 
-    // TODO: thought, if it can use CommandContext#CommandMap also
-    private static final Multimap<Integer, String> matchResult = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
 
     public Collection<String> getRecommendCommand(String inputString) {
 
+        // TODO: thought, if it can use CommandContext#CommandMap also
+        final Multimap<Integer, String> matchResult = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
+
         Collection<String> recommend = new ArrayList<>();
-        // reset match result collection
-        matchResult.clear();
 
         try {
 
@@ -42,7 +41,7 @@ public class CommandMatcher {
             // it is not a good idea to use CyclicBarrier, so need reset the countDownLatch
             CountDownLatch countDownLatch = new CountDownLatch(commands.size());
             for (String cmd : commands) {
-                executorService.execute(new Worker(cmd, inputString, countDownLatch));
+                executorService.execute(new Worker(cmd, inputString, countDownLatch, matchResult));
             }
 
             boolean await = countDownLatch.await(10L, TimeUnit.SECONDS);
@@ -129,11 +128,13 @@ public class CommandMatcher {
         private String cmd;
         private String inputString;
         private CountDownLatch countDownLatch;
+        private Multimap<Integer, String> matchResult;
 
-        Worker(String cmd, String inputString, CountDownLatch countDownLatch) {
+        Worker(String cmd, String inputString, CountDownLatch countDownLatch, Multimap<Integer, String> mr) {
             this.cmd = cmd;
             this.inputString = inputString;
             this.countDownLatch = countDownLatch;
+            matchResult = mr;
         }
 
         @Override
