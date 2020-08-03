@@ -9,5 +9,5 @@ jobs:
     - uses: actions/first-interaction@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN  }}
-        issue-message: 'Welcome to have an issues here to make this project better! :rocket:'' first issue'
+        issue-message: 'Thx for having an issues here to make this project better! :rocket:'
         pr-message: 'Thx for having an PR here to make this project better! :tada: '
