@@ -4,6 +4,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.koy.kbot.configuration.core.CommandContext;
+import com.koy.kbot.exception.KBotException;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -28,7 +29,7 @@ public class CommandMatcher {
     private static final int DEFAULT_THRESHOLD = 2;
 
 
-    public Collection<String> getRecommendCommand(String inputString) {
+    Collection<String> getRecommendCommand(String inputString) {
 
         // TODO: thought, if it can use CommandContext#CommandMap also
         final Multimap<Integer, String> matchResult = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
@@ -40,26 +41,23 @@ public class CommandMatcher {
             List<String> commands = CommandContext.getCommands();
             // it is not a good idea to use CyclicBarrier, so need reset the countDownLatch
             CountDownLatch countDownLatch = new CountDownLatch(commands.size());
+
             for (String cmd : commands) {
-                executorService.execute(new Worker(cmd, inputString, countDownLatch, matchResult));
+                executorService.execute(new Worker(cmd.toUpperCase(), inputString.toUpperCase(), countDownLatch, matchResult));
             }
 
-            boolean await = countDownLatch.await(10L, TimeUnit.SECONDS);
-//            if (!await){}
+            countDownLatch.await(10L, TimeUnit.SECONDS);
             List<Integer> scores = matchResult.keySet().stream().sorted().collect(Collectors.toList());
+
             if (scores.isEmpty() || scores.get(0) > DEFAULT_THRESHOLD) {
                 return recommend;
             }
 
             return matchResult.get(scores.get(0));
+
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new KBotException("help cant get the help");
         }
-
-
-        return recommend;
-
-
     }
 
     /**

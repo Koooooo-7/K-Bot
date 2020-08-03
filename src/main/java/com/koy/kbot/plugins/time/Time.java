@@ -41,8 +41,8 @@ public class Time implements IPlugin {
             return;
         }
 
-        String city = args[2];
-        sendTimeByCity(city);
+        String inputCity = args[2];
+        sendTimeByCity(inputCity);
 
     }
 
@@ -51,8 +51,9 @@ public class Time implements IPlugin {
         return "time";
     }
 
-    private void sendTimeByCity(String city) {
-        String url = ApiURLConstant.TIME_API + city;
+    private void sendTimeByCity(String cityName) {
+
+        String url = ApiURLConstant.TIME_API + cityName;
         JSONObject requestGetJsonObject = HttpUtils.requestGetJsonObject(url);
 
         try {
@@ -61,18 +62,18 @@ public class Time implements IPlugin {
                 throw new KBotException("cant get time");
             }
             JSONObject resultJsonObject = requestGetJsonObject.getJSONObject("result");
-            String continents_en = resultJsonObject.getString("continents_en");
-            String contry_en = resultJsonObject.getString("contry_en");
-            String city_en = resultJsonObject.getString("city_en");
+            String continents = resultJsonObject.getString("continents_en");
+            String country = resultJsonObject.getString("contry_en");
+            String city = resultJsonObject.getString("city_en");
             String datetime = resultJsonObject.getString("datetime_1");
             String week = resultJsonObject.getString("week_4");
 
             StringBuilder address = new StringBuilder();
-            address.append(city_en.toUpperCase())
+            address.append(city.toUpperCase())
                     .append(".")
-                    .append(contry_en.toUpperCase())
+                    .append(country.toUpperCase())
                     .append(".")
-                    .append(continents_en.toUpperCase());
+                    .append(continents.toUpperCase());
 
             MessageEmbed messageEmbed = new EmbedBuilder()
                     .setColor(Color.PINK)
