@@ -11,7 +11,7 @@
 
 
 
-### [Intruduction](#Intruduction)  ·  [Usage](#bookusage)  ·  [Plugins](#wrenchplugins)  ·  [Contributing](##Contributing)  · [Statement](#-statement )
+### [Intruduction](#Intruduction)  ·  [Usage](#bookusage)  ·  [Plugins](#wrenchplugins)  ·  [Contributing](#Contributing)  · [Statement](#-statement )
 
 <!---
 labels , star... something
@@ -37,7 +37,7 @@ labels , star... something
 
 >  A DIY bot that you can be the designer of your own **`K-bot`** ​!:fire:
 
-**`K-bot`** is a Quantum Discord which means she can do everything, if she has enough plugins. :rocket:
+**`K-bot`** is a Quantum [Discord](discord.com) bot, which means she can do everything, if she has enough plugins. :rocket:
 
 It is **NOT** the specific bot which is just for importing to your Discord server( absolutely, she can do that ! :wink: ).
 
@@ -173,6 +173,19 @@ it is so easy to add an new plugin to `K-bot`, isn't it ! :tada:
 | weather | Report the current weather details of the city.              | weather [cityname] | weather Beijing |
 |         |                                                              |                    |                 |
 | ...     | waiting for your ideas !:rocket:                             |                    |                 |
+
+**Help**
+
+`help` is an embed command that it can help a lot about the commands, such as recommending the similar commands when you called a non exist command.
+
+---
+
+## :rocket:Contributing
+
+**Folk it !**
+
+- fix bugs： send a PR here !
+- feature：it is better to have an `feature request` issue first and then, working on it !
 
 ---
 
