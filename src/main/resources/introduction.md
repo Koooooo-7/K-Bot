@@ -1,7 +1,11 @@
-Hey,I'm kbot , a easy to use discord bot for you.
-Do you want to know what can i do ?
-i can do what you want through various plugins.if you want to customize your bot, just add plugins to do that.
-this is plugin list util now.
+Hey, I'm kbot :wink:, I m not only a high flexible and out of box discord bot,
+but also it is so easy to add more plugins to make your Discord channel sparkling!  
+- Wanna have a try ?
+- Do you want to know what I can do ?
+- Do you want to give me more abilities ?  
+Just [FOLLOW ME](https://github.com/Koooooo-7/K-Bot) here, and adding your own customized plugins whatever you want!
+
+And, I have prepared some plugins for you here.
 >  NOTE:  **Command** doesn't contain the command/name calling the bot. :pencil:
 
 | Plugin  | Description                                                  | Command            | Example         |

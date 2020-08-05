@@ -57,13 +57,13 @@ public class Introduction implements IPlugin {
 
     /**
      * try to get introduction info
-     * By default, classpath:/introduction.txt will be the introduction
+     * By default, classpath:/introduction.md will be the introduction
      * try to change introduction txt location and introduction txt details to change the introduction info
      */
     private void getIntroduction() {
         // TODO add more properties to customize introduction
         try {
-            File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "introduction.txt");
+            File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "introduction.md");
             String introduction = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             if(!StringUtils.isEmpty(introduction)){
                 INTRODUCTION = introduction;
