@@ -1,0 +1,14 @@
+Hey,I'm kbot , a easy to use discord bot for you.
+Do you want to know what can i do ?
+i can do what you want through various plugins.if you want to customize your bot, just add plugins to do that.
+this is plugin list util now.
+>  NOTE:  **Command** doesn't contain the command/name calling the bot. :pencil:
+
+| Plugin  | Description                                                  | Command            | Example         |
+| ------- | ------------------------------------------------------------ | ------------------ | --------------- |
+| Player  | A audio player based on [lavaplayer](https://github.com/sedmelluq/lavaplayer). | play [- u ]        | play hello      |
+| Joke    | Send a joke randomly.                                        | joke               | joke            |
+| time    | Report the current time of the city.                         | time [cityname]    | time Tokyo      |
+| weather | Report the current weather details of the city.              | weather [cityname] | weather Beijing |
+| introduction | Introduce bot                                           | hi                 | hi              |
+
