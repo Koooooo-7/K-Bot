@@ -6,13 +6,10 @@ but also it is so easy to add more plugins to make your Discord channel sparklin
 Just [FOLLOW ME](https://github.com/Koooooo-7/K-Bot) here, and adding your own customized plugins whatever you want!
 
 And, I have prepared some plugins for you here.
->  NOTE:  **Command** doesn't contain the command/name calling the bot. :pencil:
 
-| Plugin  | Description                                                  | Command            | Example         |
-| ------- | ------------------------------------------------------------ | ------------------ | --------------- |
-| Player  | A audio player based on [lavaplayer](https://github.com/sedmelluq/lavaplayer). | play [- u ]        | play hello      |
-| Joke    | Send a joke randomly.                                        | joke               | joke            |
-| time    | Report the current time of the city.                         | time [cityname]    | time Tokyo      |
-| weather | Report the current weather details of the city.              | weather [cityname] | weather Beijing |
-| introduction | Introduce bot                                           | hi                 | hi              |
+- Player : A audio player based on [lavaplayer](https://github.com/sedmelluq/lavaplayer).     
+- Joke : Send a joke randomly.                                         
+- time : Report the current time of the city.                          
+- weather : Report the current weather details of the city.            
+- introduction : Introduce bot                                         
 
