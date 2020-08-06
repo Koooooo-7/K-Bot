@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 
@@ -17,7 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-@Plugin(name = "intro" , call = "intro" , fastCommand = {"intro" , "hi" , "hey"})
+/**
+ * introduction plugin to show introduction of bot
+ */
+@Plugin(name = "introduction" , call = "intro" , fastCommand = {"intro" , "hi" , "hey"})
 @Slf4j
 public class Introduction implements IPlugin {
     /**
@@ -26,9 +30,23 @@ public class Introduction implements IPlugin {
     private static volatile String INTRODUCTION = null;
 
     /**
-     * the default title of message
+     * the final result when plugin cant get or format introduction
+     */
+    private static final String NO_INTRODUCTION = "sorry , i dont know where is my introduction, (╯﹏╰)b";
+
+    /**
+     * default title of message
      */
     private static final String DEFAULT_MESSAGE_TITLE = "INTRODUCTION";
+    /**
+     * location of bot introduction
+     */
+    @Value("${k-bot.introduction.location:classpath:introduction.md}")
+    private String introductionLocation;
+    /**
+     * to avoid obtain introduction repeated invoke
+     */
+    private static volatile boolean INTRODUCTION_OBTAIN_DONE = false;
 
     @Autowired
     MessageSender messageSender;
@@ -36,17 +54,28 @@ public class Introduction implements IPlugin {
     @Autowired
     GuildMessageReceivedEventHolder guildMessageReceivedEventHolder;
 
+
     @Override
     public void handle(String[] args){
         //this plugin dont need args , so no matter what args is , just send the same message
-        if(StringUtils.isEmpty(INTRODUCTION)){
+        MessageEmbed messageEmbed = null;
+        if(!INTRODUCTION_OBTAIN_DONE){
             getIntroduction();
         }
-        MessageEmbed messageEmbed = new EmbedBuilder()
-                .setColor(Color.PINK)
-                .setTitle(DEFAULT_MESSAGE_TITLE)
-                .setDescription(INTRODUCTION)
-                .build();
+        if(StringUtils.isEmpty(INTRODUCTION)){
+            //tried to get ,but fail
+            messageEmbed = new EmbedBuilder()
+                    .setColor(Color.PINK)
+                    .setTitle(DEFAULT_MESSAGE_TITLE)
+                    .setDescription(NO_INTRODUCTION)
+                    .build();
+        }else {
+            messageEmbed = new EmbedBuilder()
+                    .setColor(Color.PINK)
+                    .setTitle(DEFAULT_MESSAGE_TITLE)
+                    .setDescription(INTRODUCTION)
+                    .build();
+        }
         messageSender.setEmbed(guildMessageReceivedEventHolder.getChannel(),messageEmbed);
     }
 
@@ -61,15 +90,19 @@ public class Introduction implements IPlugin {
      * try to change introduction txt location and introduction txt details to change the introduction info
      */
     private void getIntroduction() {
-        // TODO add more properties to customize introduction
+        if(INTRODUCTION_OBTAIN_DONE){
+            return;
+        }
+        //no matter what result is , dont try again.
+        INTRODUCTION_OBTAIN_DONE = true;
         try {
-            File file = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "introduction.md");
+            File file = ResourceUtils.getFile(introductionLocation);
             String introduction = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             if(!StringUtils.isEmpty(introduction)){
                 INTRODUCTION = introduction;
             }
         } catch (IOException e) {
-            log.info("get introduction string error , please check file is exists and correct");
+            log.info("get introduction error , please check file is exists and correct");
             e.printStackTrace();
         }
     }
