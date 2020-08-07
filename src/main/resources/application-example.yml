@@ -1,7 +1,6 @@
 k-bot:
   token: "your bot token"
   cmd: "!koy"
-
   # register plugins
   plugins:
   - time
@@ -12,3 +11,6 @@ k-bot:
   listeners:
   - kbot
   - member
+
+  introduction:
+    location: classpath:introduction.md

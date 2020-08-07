@@ -3,6 +3,7 @@ package com.koy.kbot.configuration;
 import com.koy.kbot.configuration.condition.ConditionalOnSummoned;
 import com.koy.kbot.listener.KBotListener;
 import com.koy.kbot.plugins.audioplayer.AudioPlayer;
+import com.koy.kbot.plugins.introduction.Introduction;
 import com.koy.kbot.plugins.joke.Joker;
 import com.koy.kbot.plugins.time.Time;
 import com.koy.kbot.plugins.weather.Weather;
@@ -67,6 +68,15 @@ public class KBotConfiguration {
     @ConditionalOnSummoned(name = "k-bot.plugins", havingValue = "weather")
     public Weather weather(){
         return new Weather();
+    }
+
+    /**
+     * introduction plugin for bot
+     */
+    @Bean
+    @ConditionalOnSummoned(name = "k-bot.plugins", havingValue = "introduction")
+    public Introduction introduction(){
+        return new Introduction();
     }
 
 }
