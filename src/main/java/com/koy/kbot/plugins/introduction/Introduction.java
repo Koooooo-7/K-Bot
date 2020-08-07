@@ -27,7 +27,7 @@ public class Introduction implements IPlugin {
     /**
      * introduction
      */
-    private static volatile String INTRODUCTION = null;
+    private static volatile String introductionText = null;
 
     /**
      * the final result when plugin cant get or format introduction
@@ -46,7 +46,7 @@ public class Introduction implements IPlugin {
     /**
      * to avoid obtain introduction repeated invoke
      */
-    private static volatile boolean INTRODUCTION_OBTAIN_DONE = false;
+    private static volatile boolean introductionObtainDone = false;
 
     @Autowired
     MessageSender messageSender;
@@ -59,10 +59,10 @@ public class Introduction implements IPlugin {
     public void handle(String[] args){
         //this plugin dont need args , so no matter what args is , just send the same message
         MessageEmbed messageEmbed = null;
-        if(!INTRODUCTION_OBTAIN_DONE){
-            getIntroduction();
+        if(!introductionObtainDone){
+            getIntroduction(introductionLocation);
         }
-        if(StringUtils.isEmpty(INTRODUCTION)){
+        if(StringUtils.isEmpty(introductionText)){
             //tried to get ,but fail
             messageEmbed = new EmbedBuilder()
                     .setColor(Color.PINK)
@@ -73,7 +73,7 @@ public class Introduction implements IPlugin {
             messageEmbed = new EmbedBuilder()
                     .setColor(Color.PINK)
                     .setTitle(DEFAULT_MESSAGE_TITLE)
-                    .setDescription(INTRODUCTION)
+                    .setDescription(introductionText)
                     .build();
         }
         messageSender.setEmbed(guildMessageReceivedEventHolder.getChannel(),messageEmbed);
@@ -89,21 +89,20 @@ public class Introduction implements IPlugin {
      * By default, classpath:/introduction.md will be the introduction
      * try to change introduction txt location and introduction txt details to change the introduction info
      */
-    private void getIntroduction() {
-        if(INTRODUCTION_OBTAIN_DONE){
+    private synchronized static void getIntroduction(String introductionLocation) {
+        if(introductionObtainDone){
             return;
         }
         //no matter what result is , dont try again.
-        INTRODUCTION_OBTAIN_DONE = true;
+        introductionObtainDone = true;
         try {
             File file = ResourceUtils.getFile(introductionLocation);
             String introduction = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             if(!StringUtils.isEmpty(introduction)){
-                INTRODUCTION = introduction;
+                introductionText = introduction;
             }
         } catch (IOException e) {
-            log.info("get introduction error , please check file is exists and correct");
-            e.printStackTrace();
+            log.error("get introduction error , please check file is exists and correct" , e);
         }
     }
 }
