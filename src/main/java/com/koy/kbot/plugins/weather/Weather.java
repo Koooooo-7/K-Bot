@@ -1,6 +1,7 @@
 package com.koy.kbot.plugins.weather;
 
 import com.koy.kbot.common.MessageSender;
+import com.koy.kbot.configuration.core.Description;
 import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.entity.weather.WeatherInfo;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
@@ -21,6 +22,7 @@ import java.util.List;
  * @author sivyer wang
  */
 @Plugin(name = "weather", call = "weather", fastCommand = "w")
+@Description(author = "sivyer9303" , desc = "Report the current weather details of the city" , example = "weather beijing")
 public class Weather implements IPlugin {
 
     @Autowired

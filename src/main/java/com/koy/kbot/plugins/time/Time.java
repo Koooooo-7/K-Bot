@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.koy.kbot.common.MessageSender;
 import com.koy.kbot.common.constant.ApiURLConstant;
 import com.koy.kbot.common.util.HttpUtils;
+import com.koy.kbot.configuration.core.Description;
 import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.exception.KBotException;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
@@ -22,6 +23,7 @@ import java.awt.*;
  * @Date 2020/06/14
  */
 @Plugin(name = "time", call = "time", fastCommand = "t")
+@Description(author = "Koy" , desc = "Report the current time of the city" , example = "time Tokyo")
 public class Time implements IPlugin {
 
     private static final String DEFAULT_CITY = "beijing";

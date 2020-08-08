@@ -1,6 +1,7 @@
 package com.koy.kbot.plugins.introduction;
 
 import com.koy.kbot.common.MessageSender;
+import com.koy.kbot.configuration.core.DescriptionHolder;
 import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
@@ -95,11 +96,20 @@ public class Introduction implements IPlugin {
         }
         //no matter what result is , dont try again.
         introductionObtainDone = true;
+        StringBuilder sb = new StringBuilder();
         try {
             File file = ResourceUtils.getFile(introductionLocation);
             String introduction = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+            String pluginDescription = DescriptionHolder.getDescriptions();
             if(!StringUtils.isEmpty(introduction)){
-                introductionText = introduction;
+                sb.append(introduction);
+                if(!StringUtils.isEmpty(pluginDescription)){
+                    String pluginDescriptionPrefix = "And, I have prepared some plugins for you here.\n" +
+                            " >  NOTE:  **Command** doesn't contain the command/name calling the bot. :pencil: \n";
+                    sb.append(pluginDescriptionPrefix);
+                    sb.append(pluginDescription);
+                }
+                introductionText = sb.toString();
             }
         } catch (IOException e) {
             log.error("get introduction error , please check file is exists and correct" , e);
