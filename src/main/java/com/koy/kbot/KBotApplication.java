@@ -19,11 +19,11 @@ import java.util.List;
 @SpringBootApplication
 public class KBotApplication {
 
-    @Autowired
-    private List<IListener> listeners;
-
-    @Autowired
-    private KBotProperties kBotProperties;
+//    @Autowired
+//    private List<IListener> listeners;
+//
+//    @Autowired
+//    private KBotProperties kBotProperties;
 
     @Autowired
     CommandContext commandContext;
@@ -38,12 +38,12 @@ public class KBotApplication {
     @PostConstruct
     public void bootstrap() throws LoginException {
         commandContext.initPluginsCommand();
-        JDA jda = JDABuilderWrapper.createDefault(kBotProperties.getToken())
-                .addEventListeners(listeners)
-                .build();
-
-        jda.getPresence().setActivity(Activity.watching("Koy Coding Show"));
-        jda.getPresence().setStatus(OnlineStatus.ONLINE);
+//        JDA jda = JDABuilderWrapper.createDefault(kBotProperties.getToken())
+//                .addEventListeners(listeners)
+//                .build();
+//
+//        jda.getPresence().setActivity(Activity.watching("Koy Coding Show"));
+//        jda.getPresence().setStatus(OnlineStatus.ONLINE);
 
     }
 
