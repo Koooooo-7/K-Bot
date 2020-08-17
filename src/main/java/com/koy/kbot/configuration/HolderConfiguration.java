@@ -1,5 +1,6 @@
 package com.koy.kbot.configuration;
 
+import com.koy.kbot.holder.DescriptionHolder;
 import com.koy.kbot.holder.GuildMemberEventHolder;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.listener.MemberListener;
@@ -24,5 +25,13 @@ public class HolderConfiguration {
     @ConditionalOnClass(MemberListener.class)
     public GuildMemberEventHolder guildMemberEventHolder(){
         return new GuildMemberEventHolder();
+    }
+
+    /**
+     * auto configuration of descriptionHolder
+     */
+    @Bean
+    public DescriptionHolder descriptionHolder(){
+        return new DescriptionHolder();
     }
 }

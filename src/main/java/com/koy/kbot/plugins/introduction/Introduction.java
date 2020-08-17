@@ -1,7 +1,7 @@
 package com.koy.kbot.plugins.introduction;
 
 import com.koy.kbot.common.MessageSender;
-import com.koy.kbot.configuration.core.DescriptionHolder;
+import com.koy.kbot.holder.DescriptionHolder;
 import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
 import com.koy.kbot.plugins.IPlugin;
@@ -55,6 +55,8 @@ public class Introduction implements IPlugin {
     @Autowired
     GuildMessageReceivedEventHolder guildMessageReceivedEventHolder;
 
+    @Autowired
+    private DescriptionHolder descriptionHolder;
 
     @Override
     public void handle(String[] args){
@@ -90,7 +92,7 @@ public class Introduction implements IPlugin {
      * By default, classpath:/introduction.md will be the introduction
      * try to change introduction txt location and introduction txt details to change the introduction info
      */
-    private static synchronized void getIntroduction(String introductionLocation) {
+    private synchronized void getIntroduction(String introductionLocation) {
         if(introductionObtainDone){
             return;
         }
@@ -100,7 +102,7 @@ public class Introduction implements IPlugin {
         try {
             File file = ResourceUtils.getFile(introductionLocation);
             String introduction = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-            String pluginDescription = DescriptionHolder.getDescriptions();
+            String pluginDescription = descriptionHolder.getDescriptions();
             if(!StringUtils.isEmpty(introduction)){
                 sb.append(introduction);
                 if(!StringUtils.isEmpty(pluginDescription)){

@@ -1,7 +1,6 @@
 package com.koy.kbot;
 
 import com.koy.kbot.configuration.core.CommandContext;
-import com.koy.kbot.configuration.core.DescriptionHolder;
 import com.koy.kbot.configuration.core.JDABuilderWrapper;
 import com.koy.kbot.configuration.properties.KBotProperties;
 import com.koy.kbot.listener.IListener;
