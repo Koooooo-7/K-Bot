@@ -19,14 +19,14 @@ public class DescriptionHolder {
     /**
      * description info map
      */
-    private final ConcurrentMap<String, DescriptionInfo> DESCRIPTION_MAP = new ConcurrentHashMap<>(16);
+    private final ConcurrentMap<String, DescriptionInfo> descriptionMap = new ConcurrentHashMap<>(16);
 
     /**
      * put description into map
      */
     public void putDescription(Description description, Plugin plugin){
         DescriptionInfo info = formatAnnotations(description);
-        DESCRIPTION_MAP.putIfAbsent(plugin.name(), info);
+        descriptionMap.putIfAbsent(plugin.name(), info);
     }
 
     /**
@@ -34,7 +34,7 @@ public class DescriptionHolder {
      */
     public String getDescriptions(){
         StringBuilder stringBuilder = new StringBuilder();
-        DESCRIPTION_MAP.forEach((name,info) -> stringBuilder.append(name)
+        descriptionMap.forEach((name, info) -> stringBuilder.append(name)
                 .append(":")
                 .append(info.getDesc())
                 .append(",")
