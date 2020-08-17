@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.koy.kbot.common.MessageSender;
 import com.koy.kbot.common.constant.ApiURLConstant;
 import com.koy.kbot.common.util.HttpUtils;
+import com.koy.kbot.configuration.core.Description;
 import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.exception.KBotException;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
@@ -27,6 +28,7 @@ import java.io.IOException;
  * @Date 2020/06/06
  */
 @Plugin(name = "joker", call = "joker", fastCommand = {"j", "jk"})
+@Description(author = "Koy" , desc = "Send a joke randomly." , example = "joke")
 public class Joker implements IPlugin {
 
     private static final String JOKE_API = ApiURLConstant.JOKE_API;
