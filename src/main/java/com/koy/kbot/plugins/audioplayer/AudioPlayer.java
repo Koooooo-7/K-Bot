@@ -3,6 +3,7 @@ package com.koy.kbot.plugins.audioplayer;
 import com.google.common.base.Joiner;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.koy.kbot.configuration.core.Description;
 import com.koy.kbot.configuration.core.Plugin;
 import com.koy.kbot.exception.KBotException;
 import com.koy.kbot.holder.GuildMessageReceivedEventHolder;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2020/06/09
  */
 @Plugin(name = "audioPlayer", call = "play",fastCommand = "p")
+@Description(author = "Koy" , desc = "A audio player based on [lavaplayer](https://github.com/sedmelluq/lavaplayer)" , example = "play hello")
 public class AudioPlayer implements IPlugin {
 
     private static final Cache<String, String> trackUrlCache = CacheBuilder.newBuilder()
