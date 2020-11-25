@@ -22,12 +22,12 @@ public class NetEaseSearcher implements IMusicSearcher {
     }
 
     @Override
-    public String search(String songName){
+    public String search(String songName) {
         // trackUrl == null
-        String searchSong = ApiURLConstant.NET_EASE_SEARCH_API+songName;
+        String searchSong = ApiURLConstant.NET_EASE_SEARCH_API + songName;
         JSONObject requestGetJsonObject = HttpUtils.requestGetJsonObject(searchSong);
 
-        if (requestGetJsonObject == null){
+        if (requestGetJsonObject == null) {
             return null;
         }
         try {
@@ -42,8 +42,6 @@ public class NetEaseSearcher implements IMusicSearcher {
 
         return null;
     }
-
-
 
 
 }

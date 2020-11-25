@@ -10,12 +10,14 @@ public interface IMusicSearcher {
 
     /**
      * the searcher order
+     *
      * @return order, from smaller to bigger
      */
-     int getOrder();
+    int getOrder();
 
     /**
      * search
+     *
      * @return trackUrl
      */
     String search(String songName);

@@ -22,7 +22,7 @@ import java.util.List;
  * @author sivyer wang
  */
 @Plugin(name = "weather", call = "weather", fastCommand = "w")
-@Description(author = "sivyer9303" , desc = "Report the current weather details of the city" , example = "weather beijing")
+@Description(author = "sivyer9303", desc = "Report the current weather details of the city", example = "weather beijing")
 public class Weather implements IPlugin {
 
     @Autowired

@@ -39,9 +39,9 @@ public class OpenWeatherObtain extends AbstractWeatherObtain {
      * @return formatted url
      */
     @Override
-    protected String formatUrl(WeatherProperties.WeatherObtainProperties props,String cityCode) {
+    protected String formatUrl(WeatherProperties.WeatherObtainProperties props, String cityCode) {
         String apiUrl = props.getApiUrl();
-        return String.format(apiUrl,cityCode,props.getApiToken());
+        return String.format(apiUrl, cityCode, props.getApiToken());
     }
 
     /**
@@ -54,7 +54,7 @@ public class OpenWeatherObtain extends AbstractWeatherObtain {
     protected WeatherInfo getWeatherInfo(JSONObject weatherInfoJson) {
         JSONArray weather = weatherInfoJson.getJSONArray("weather");
         WeatherInfo info = null;
-        if(null != weather){
+        if (null != weather) {
             //get the first one
             JSONObject mainInfo = weather.getJSONObject(0);
             JSONObject windJson = weatherInfoJson.getJSONObject("wind");

@@ -28,7 +28,7 @@ import java.io.IOException;
  * @Date 2020/06/06
  */
 @Plugin(name = "joker", call = "joker", fastCommand = {"j", "jk"})
-@Description(author = "Koy" , desc = "Send a joke randomly." , example = "joke")
+@Description(author = "Koy", desc = "Send a joke randomly.", example = "joke")
 public class Joker implements IPlugin {
 
     private static final String JOKE_API = ApiURLConstant.JOKE_API;

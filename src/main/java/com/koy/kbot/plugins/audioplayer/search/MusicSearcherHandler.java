@@ -34,7 +34,7 @@ public class MusicSearcherHandler {
         lock.lock();
         try {
             String songId = doSearch(songName);
-            return ApiURLConstant.NET_EASE_MUSIC_API+songId+ApiURLConstant.SUFFIX_MP3;
+            return ApiURLConstant.NET_EASE_MUSIC_API + songId + ApiURLConstant.SUFFIX_MP3;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

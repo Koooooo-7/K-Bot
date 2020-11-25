@@ -19,6 +19,7 @@ public interface IWeatherObtain {
 
     /**
      * get alias
+     *
      * @return alias
      */
     String getAlias();

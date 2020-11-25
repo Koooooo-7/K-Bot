@@ -23,14 +23,15 @@ public abstract class AbstractWeatherObtain implements IWeatherObtain {
     /**
      * get format url of obtain weather
      *
-     * @param props obtain properties
+     * @param props    obtain properties
      * @param cityCode city code
      * @return formatted url
      */
-    protected abstract String formatUrl(WeatherProperties.WeatherObtainProperties props,String cityCode);
+    protected abstract String formatUrl(WeatherProperties.WeatherObtainProperties props, String cityCode);
 
     /**
      * get weather info by json
+     *
      * @param weatherInfoJson weather info json
      * @return weather info
      */
@@ -46,23 +47,24 @@ public abstract class AbstractWeatherObtain implements IWeatherObtain {
     public WeatherInfo obtain(String cityCode) {
         WeatherProperties.WeatherObtainProperties propsByAlias = getPropsByAlias();
         WeatherInfo info = null;
-        if(null != propsByAlias){
-            String url = formatUrl(propsByAlias,cityCode);
+        if (null != propsByAlias) {
+            String url = formatUrl(propsByAlias, cityCode);
             JSONObject weatherInfoJson = HttpUtils.requestGetJsonObject(url);
-            info =  getWeatherInfo(weatherInfoJson);
+            info = getWeatherInfo(weatherInfoJson);
         }
         return info;
     }
 
     /**
      * get WeatherObtainProperties by alias
+     *
      * @return WeatherObtainProperties
      */
-    protected WeatherProperties.WeatherObtainProperties getPropsByAlias(){
+    protected WeatherProperties.WeatherObtainProperties getPropsByAlias() {
         WeatherProperties.WeatherObtainProperties prop = null;
         Set<Map.Entry<String, WeatherProperties.WeatherObtainProperties>> entries = props.getProps().entrySet();
-        for(Map.Entry<String, WeatherProperties.WeatherObtainProperties> entry: entries){
-            if(StringUtils.equals(entry.getKey(), getAlias())){
+        for (Map.Entry<String, WeatherProperties.WeatherObtainProperties> entry : entries) {
+            if (StringUtils.equals(entry.getKey(), getAlias())) {
                 prop = entry.getValue();
                 break;
             }

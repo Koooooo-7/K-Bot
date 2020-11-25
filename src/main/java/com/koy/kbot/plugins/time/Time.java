@@ -23,7 +23,7 @@ import java.awt.*;
  * @Date 2020/06/14
  */
 @Plugin(name = "time", call = "time", fastCommand = "t")
-@Description(author = "Koy" , desc = "Report the current time of the city" , example = "time Tokyo")
+@Description(author = "Koy", desc = "Report the current time of the city", example = "time Tokyo")
 public class Time implements IPlugin {
 
     private static final String DEFAULT_CITY = "beijing";

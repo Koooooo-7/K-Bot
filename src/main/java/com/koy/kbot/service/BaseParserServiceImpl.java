@@ -32,13 +32,7 @@ public class BaseParserServiceImpl implements IParserService {
         String command = args[1].toUpperCase();
 
         // send to matched plugins, if not, send to help plugin
-        IPlugin plugin = CommandContext.getCallOnPlugin(command);
-        if (plugin != null){
-            plugin.handle(args);
-            return;
-        }
-
-        plugin = CommandContext.getFastCommands(command);
+        IPlugin plugin = CommandContext.matchedPlugin(command).get();
 
         if (plugin != null){
             plugin.handle(args);
@@ -48,7 +42,7 @@ public class BaseParserServiceImpl implements IParserService {
         // Backward compatibility, remove it soon, just give the command to helper by default.
         plugins
                 .stream()
-                .filter(p -> p.command().toUpperCase().equals(command))
+                .filter(p -> p.command().equalsIgnoreCase(command))
                 .findFirst()
                 .orElseGet(() -> helper)
                 .handle(args);

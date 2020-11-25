@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * introduction plugin to show introduction of bot
  */
-@Plugin(name = "introduction" , call = "intro" , fastCommand = {"intro" , "hi" , "hey"})
+@Plugin(name = "introduction", call = "intro", fastCommand = {"intro", "hi", "hey"})
 @Slf4j
 public class Introduction implements IPlugin {
     /**
@@ -59,27 +59,27 @@ public class Introduction implements IPlugin {
     private DescriptionHolder descriptionHolder;
 
     @Override
-    public void handle(String[] args){
+    public void handle(String[] args) {
         //this plugin dont need args , so no matter what args is , just send the same message
         MessageEmbed messageEmbed = null;
-        if(!introductionObtainDone){
+        if (!introductionObtainDone) {
             getIntroduction(introductionLocation);
         }
-        if(StringUtils.isEmpty(introductionText)){
+        if (StringUtils.isEmpty(introductionText)) {
             //tried to get ,but fail
             messageEmbed = new EmbedBuilder()
                     .setColor(Color.PINK)
                     .setTitle(DEFAULT_MESSAGE_TITLE)
                     .setDescription(NO_INTRODUCTION)
                     .build();
-        }else {
+        } else {
             messageEmbed = new EmbedBuilder()
                     .setColor(Color.PINK)
                     .setTitle(DEFAULT_MESSAGE_TITLE)
                     .setDescription(introductionText)
                     .build();
         }
-        messageSender.setEmbed(guildMessageReceivedEventHolder.getChannel(),messageEmbed);
+        messageSender.setEmbed(guildMessageReceivedEventHolder.getChannel(), messageEmbed);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class Introduction implements IPlugin {
      * try to change introduction txt location and introduction txt details to change the introduction info
      */
     private synchronized void getIntroduction(String introductionLocation) {
-        if(introductionObtainDone){
+        if (introductionObtainDone) {
             return;
         }
         //no matter what result is , dont try again.
@@ -103,9 +103,9 @@ public class Introduction implements IPlugin {
             File file = ResourceUtils.getFile(introductionLocation);
             String introduction = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             String pluginDescription = descriptionHolder.getDescriptions();
-            if(!StringUtils.isEmpty(introduction)){
+            if (!StringUtils.isEmpty(introduction)) {
                 sb.append(introduction);
-                if(!StringUtils.isEmpty(pluginDescription)){
+                if (!StringUtils.isEmpty(pluginDescription)) {
                     String pluginDescriptionPrefix = "And, I have prepared some plugins for you here.\n" +
                             " >  NOTE:  **Command** doesn't contain the command/name calling the bot. :pencil: \n";
                     sb.append(pluginDescriptionPrefix);
@@ -114,7 +114,7 @@ public class Introduction implements IPlugin {
                 introductionText = sb.toString();
             }
         } catch (IOException e) {
-            log.error("get introduction error , please check file is exists and correct" , e);
+            log.error("get introduction error , please check file is exists and correct", e);
         }
     }
 }

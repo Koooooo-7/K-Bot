@@ -7,11 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.function.Supplier;
 
 /**
  * @Description
@@ -64,12 +62,16 @@ public class CommandContext {
 
     }
 
+    public static Supplier<IPlugin> matchedPlugin(String callName) {
+        IPlugin plugin = getCallOnPlugin(callName);
+        return () -> Objects.nonNull(plugin) ? plugin : getFastCommands(callName);
+    }
 
-    public static IPlugin getCallOnPlugin(String callName) {
+    private static IPlugin getCallOnPlugin(String callName) {
         return (IPlugin) calls.get(callName.toUpperCase());
     }
 
-    public static IPlugin getFastCommands(String fastCommand) {
+    private static IPlugin getFastCommands(String fastCommand) {
         return (IPlugin) fastCommands.get(fastCommand.toUpperCase());
     }
 

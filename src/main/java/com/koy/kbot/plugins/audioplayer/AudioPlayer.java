@@ -28,8 +28,8 @@ import java.util.concurrent.TimeUnit;
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/06/09
  */
-@Plugin(name = "audioPlayer", call = "play",fastCommand = "p")
-@Description(author = "Koy" , desc = "A audio player based on [lavaplayer](https://github.com/sedmelluq/lavaplayer)" , example = "play hello")
+@Plugin(name = "audioPlayer", call = "play", fastCommand = "p")
+@Description(author = "Koy", desc = "A audio player based on [lavaplayer](https://github.com/sedmelluq/lavaplayer)", example = "play hello")
 public class AudioPlayer implements IPlugin {
 
     private static final Cache<String, String> trackUrlCache = CacheBuilder.newBuilder()
@@ -68,25 +68,25 @@ public class AudioPlayer implements IPlugin {
         // check if the user in a voice channel now
         String userId = guildMessageReceivedEventHolder.getAuthor().getId();
         AudioManager audioManager = channel.getGuild().getAudioManager();
-            List<VoiceChannel> voiceChannels = audioManager.getGuild().getVoiceChannels();
-            VoiceChannel voiceChannel = voiceChannels
-                    .stream()
-                    .filter(p -> p
-                            .getMembers()
-                            .stream()
-                            .anyMatch(e -> e
-                                    .getUser()
-                                    .getId()
-                                    .equals(userId)))
-                    .findFirst()
-                    .orElseGet(() -> null);
-            if (voiceChannel == null) {
-                channel.sendMessage("> you need join a voice channel first :eyes: ").queue();
-                return;
-            }
-
-            doLoadAndPlay(channel, trackUrl, songName, voiceChannel);
+        List<VoiceChannel> voiceChannels = audioManager.getGuild().getVoiceChannels();
+        VoiceChannel voiceChannel = voiceChannels
+                .stream()
+                .filter(p -> p
+                        .getMembers()
+                        .stream()
+                        .anyMatch(e -> e
+                                .getUser()
+                                .getId()
+                                .equals(userId)))
+                .findFirst()
+                .orElseGet(() -> null);
+        if (voiceChannel == null) {
+            channel.sendMessage("> you need join a voice channel first :eyes: ").queue();
+            return;
         }
+
+        doLoadAndPlay(channel, trackUrl, songName, voiceChannel);
+    }
 
     private void doLoadAndPlay(final TextChannel channel, final String trackUrl, String songName, final VoiceChannel voiceChannel) {
         GuildMusicManager musicManager = getGuildAudioPlayer(channel.getGuild());
@@ -139,15 +139,15 @@ public class AudioPlayer implements IPlugin {
     }
 
     private void connectToVoiceChannel(AudioManager audioManager, VoiceChannel voiceChannel) {
-        if(!audioManager.isConnected()&& !audioManager.isAttemptingToConnect()){
+        if (!audioManager.isConnected() && !audioManager.isAttemptingToConnect()) {
             audioManager.openAudioConnection(voiceChannel);
         }
     }
 
 
     /**
-     *  play for song name: !cmd play song name
-     *  play for track url: !cmd play -u www.example.com/song.mp3
+     * play for song name: !cmd play song name
+     * play for track url: !cmd play -u www.example.com/song.mp3
      */
     @Override
     public void handle(String[] args) {

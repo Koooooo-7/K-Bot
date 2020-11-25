@@ -121,7 +121,7 @@ public class CommandMatcher {
     }
 
 
-    private class Worker implements Runnable {
+    private static class Worker implements Runnable {
 
         private String cmd;
         private String inputString;
