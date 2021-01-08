@@ -6,6 +6,7 @@ import lombok.Data;
 /**
  * the entity of description.
  * it is usually converted from {@link com.koy.kbot.configuration.core.Description Description} in {@link com.koy.kbot.beanprocessor.DescriptionBeanProcessor DescriptionBeanProcessor}
+ *
  * @author sivyer9303
  */
 @Builder

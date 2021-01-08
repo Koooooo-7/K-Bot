@@ -9,18 +9,18 @@ import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
  */
 public class GuildMemberEventHolder {
 
-     private final ThreadLocal<GuildMemberJoinEvent>  GuildMemberJoinEventHolder = new ThreadLocal<>();
+    private final ThreadLocal<GuildMemberJoinEvent> GuildMemberJoinEventHolder = new ThreadLocal<>();
 
 
     public void setGuildMemberJoinEventHolder(GuildMemberJoinEvent event) {
         GuildMemberJoinEventHolder.set(event);
     }
 
-    public GuildMemberJoinEvent getGuildMemberJoinEventHolder(){
+    public GuildMemberJoinEvent getGuildMemberJoinEventHolder() {
         return GuildMemberJoinEventHolder.get();
     }
 
-    public void removeGuildMemberJoinEvent(){
+    public void removeGuildMemberJoinEvent() {
         GuildMemberJoinEventHolder.remove();
     }
 

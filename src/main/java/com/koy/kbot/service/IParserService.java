@@ -6,5 +6,5 @@ package com.koy.kbot.service;
  * @Date 2020/06/06
  */
 public interface IParserService {
-    void parser(String args[]);
+    void parser(String[] args);
 }

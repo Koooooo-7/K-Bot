@@ -24,7 +24,7 @@ public class DescriptionHolder {
     /**
      * put description into map
      */
-    public void putDescription(Description description, Plugin plugin){
+    public void putDescription(Description description, Plugin plugin) {
         DescriptionInfo info = formatAnnotations(description);
         descriptionMap.putIfAbsent(plugin.name(), info);
     }
@@ -32,7 +32,7 @@ public class DescriptionHolder {
     /**
      * get descriptions
      */
-    public String getDescriptions(){
+    public String getDescriptions() {
         StringBuilder stringBuilder = new StringBuilder();
         descriptionMap.forEach((name, info) -> stringBuilder.append(name)
                 .append(":")
@@ -47,6 +47,7 @@ public class DescriptionHolder {
 
     /**
      * build DescriptionInfo by description and plugin
+     *
      * @param description see {@link Description}
      * @return DescriptionInfo
      */

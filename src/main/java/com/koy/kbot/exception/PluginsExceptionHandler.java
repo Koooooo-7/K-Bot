@@ -45,7 +45,7 @@ public class PluginsExceptionHandler {
                     .setTitle("ERROR")
                     .setDescription(ex.getMessage())
                     .addField("", "Ooops! something wrong in the plugin :ghost:", false)
-                    .addField("tips:"," use [help] to get more usage commands",true)
+                    .addField("tips:", " use [help] to get more usage commands", true)
                     .build();
 
             MessageChannel channel = guildMessageReceivedEventHolder.getChannel();

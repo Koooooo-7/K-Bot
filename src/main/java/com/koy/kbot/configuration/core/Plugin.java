@@ -3,7 +3,7 @@ package com.koy.kbot.configuration.core;
 import java.lang.annotation.*;
 
 /**
- * @Description  must add @Inherited to avoid losing annotation by CGlib
+ * @Description must add @Inherited to avoid losing annotation by CGlib
  * @Auther Koy  https://github.com/Koooooo-7
  * @Date 2020/07/18
  */

@@ -11,38 +11,38 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class GuildMessageReceivedEventHolder {
 
-     private final ThreadLocal<GuildMessageReceivedEvent>  guildMessageReceivedEventHolder = new ThreadLocal<>();
+    private final ThreadLocal<GuildMessageReceivedEvent> guildMessageReceivedEventHolder = new ThreadLocal<>();
 
 
     public void setGuildMessageReceivedEventHolder(GuildMessageReceivedEvent event) {
         guildMessageReceivedEventHolder.set(event);
     }
 
-    public GuildMessageReceivedEvent getGuildMessageReceivedEventHolder(){
+    public GuildMessageReceivedEvent getGuildMessageReceivedEventHolder() {
         return guildMessageReceivedEventHolder.get();
     }
 
-    public void removeGuildMessageReceivedEvent(){
+    public void removeGuildMessageReceivedEvent() {
         guildMessageReceivedEventHolder.remove();
     }
 
-    public MessageChannel getChannel(){
+    public MessageChannel getChannel() {
         return getGuildMessageReceivedEventHolder().getChannel();
     }
 
-    public TextChannel getTextChannel(){
+    public TextChannel getTextChannel() {
         return getGuildMessageReceivedEventHolder().getChannel();
     }
 
-    public Message getMessage(){
+    public Message getMessage() {
         return getGuildMessageReceivedEventHolder().getMessage();
     }
 
-    public String getContentRaw(){
+    public String getContentRaw() {
         return getMessage().getContentRaw();
     }
 
-    public Guild getGuild(){
+    public Guild getGuild() {
         return getGuildMessageReceivedEventHolder().getGuild();
     }
 

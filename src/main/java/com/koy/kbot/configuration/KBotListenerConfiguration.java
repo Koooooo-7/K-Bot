@@ -17,6 +17,7 @@ public class KBotListenerConfiguration {
 
     /**
      * default listener, for commands
+     *
      * @return
      */
 
@@ -32,7 +33,7 @@ public class KBotListenerConfiguration {
      */
     @Bean
     @ConditionalOnSummoned(name = "k-bot.listeners", havingValue = "member")
-    public MemberListener memberListener(){
+    public MemberListener memberListener() {
         return new MemberListener();
     }
 }

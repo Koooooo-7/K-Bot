@@ -24,5 +24,4 @@ public @interface ConditionalOnSummoned {
     boolean matchIfMissing() default false;
 
 
-
 }

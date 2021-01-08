@@ -22,15 +22,13 @@ import java.util.Collection;
 @SuppressWarnings("deprecation")
 public class JDABuilderWrapper extends JDABuilder {
 
-    private JDABuilderWrapper(@Nullable String token, int intents)
-    {
+    private JDABuilderWrapper(@Nullable String token, int intents) {
         this.token = token;
         this.intents = 1 | intents;
     }
 
-    private JDABuilderWrapper applyDefault()
-    {
-        return (JDABuilderWrapper)this.setMemberCachePolicy(MemberCachePolicy.DEFAULT)
+    private JDABuilderWrapper applyDefault() {
+        return (JDABuilderWrapper) this.setMemberCachePolicy(MemberCachePolicy.DEFAULT)
                 .setChunkingFilter(ChunkingFilter.NONE)
                 .disableCache(CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY)
                 .setLargeThreshold(250);
@@ -38,8 +36,7 @@ public class JDABuilderWrapper extends JDABuilder {
 
     @Nonnull
     @CheckReturnValue
-    public static JDABuilderWrapper createDefault(@Nullable String token)
-    {
+    public static JDABuilderWrapper createDefault(@Nullable String token) {
         return new JDABuilderWrapper(token, GatewayIntent.DEFAULT).applyDefault();
     }
 

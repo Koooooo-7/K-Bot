@@ -19,10 +19,10 @@ public class WeatherProperties {
     /**
      * properties map
      */
-    Map<String,WeatherObtainProperties> props = new LinkedHashMap<>();
+    Map<String, WeatherObtainProperties> props = new LinkedHashMap<>();
 
     @Data
-    public static class WeatherObtainProperties{
+    public static class WeatherObtainProperties {
         /**
          * api url
          */

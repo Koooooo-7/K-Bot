@@ -34,7 +34,7 @@ public class BaseParserServiceImpl implements IParserService {
         // send to matched plugins, if not, send to help plugin
         IPlugin plugin = CommandContext.matchedPlugin(command).get();
 
-        if (plugin != null){
+        if (plugin != null) {
             plugin.handle(args);
             return;
         }
@@ -46,7 +46,6 @@ public class BaseParserServiceImpl implements IParserService {
                 .findFirst()
                 .orElseGet(() -> helper)
                 .handle(args);
-
 
 
     }

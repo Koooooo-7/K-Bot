@@ -40,13 +40,9 @@ public class MessageSender {
         threadPoolExecutor.execute(new sendStringMsgWorker(content, channel));
     }
 
-    ;
-
     public void setEmbed(MessageChannel channel, MessageEmbed content) {
         threadPoolExecutor.execute(new sendEmbedMsgWorker(content, channel));
     }
-
-    ;
 
     private class sendStringMsgWorker implements Runnable {
 

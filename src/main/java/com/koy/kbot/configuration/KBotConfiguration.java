@@ -37,6 +37,7 @@ public class KBotConfiguration {
 
     /**
      * Send the time on specific city name
+     *
      * @return
      */
     @Bean
@@ -47,6 +48,7 @@ public class KBotConfiguration {
 
     /**
      * AudioPlayer on song name
+     *
      * @return
      */
     @Bean
@@ -60,13 +62,13 @@ public class KBotConfiguration {
 
     @Bean
     @ConditionalOnSummoned(name = "k-bot.plugins", havingValue = "player")
-    public AudioPlayer audioPlayer(){
+    public AudioPlayer audioPlayer() {
         return new AudioPlayer();
     }
 
     @Bean
     @ConditionalOnSummoned(name = "k-bot.plugins", havingValue = "weather")
-    public Weather weather(){
+    public Weather weather() {
         return new Weather();
     }
 
@@ -75,7 +77,7 @@ public class KBotConfiguration {
      */
     @Bean
     @ConditionalOnSummoned(name = "k-bot.plugins", havingValue = "introduction")
-    public Introduction introduction(){
+    public Introduction introduction() {
         return new Introduction();
     }
 

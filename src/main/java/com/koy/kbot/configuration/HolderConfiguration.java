@@ -17,13 +17,13 @@ import org.springframework.context.annotation.Configuration;
 public class HolderConfiguration {
 
     @Bean
-    public GuildMessageReceivedEventHolder guildMessageReceivedEventHolder(){
+    public GuildMessageReceivedEventHolder guildMessageReceivedEventHolder() {
         return new GuildMessageReceivedEventHolder();
     }
 
     @Bean
     @ConditionalOnClass(MemberListener.class)
-    public GuildMemberEventHolder guildMemberEventHolder(){
+    public GuildMemberEventHolder guildMemberEventHolder() {
         return new GuildMemberEventHolder();
     }
 
@@ -31,7 +31,7 @@ public class HolderConfiguration {
      * auto configuration of descriptionHolder
      */
     @Bean
-    public DescriptionHolder descriptionHolder(){
+    public DescriptionHolder descriptionHolder() {
         return new DescriptionHolder();
     }
 }

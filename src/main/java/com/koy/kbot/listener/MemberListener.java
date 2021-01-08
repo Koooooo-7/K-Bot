@@ -28,6 +28,6 @@ public class MemberListener extends ListenerAdapter implements IListener {
         guildMemberEventHolder.setGuildMemberJoinEventHolder(event);
         TextChannel channel = event.getGuild().getDefaultChannel();
         String nickname = event.getMember().getNickname();
-        channel.sendMessage("Wow ! "+nickname+" welcome to the beer bar ! :beers:").queue();
+        channel.sendMessage("Wow ! " + nickname + " welcome to the beer bar ! :beers:").queue();
     }
 }
